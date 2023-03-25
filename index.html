@@ -1,4 +1,73 @@
-<!-- írd ki nagy betűkkel, középre, hogy "helló Edina!"-->
+<!-- egy mezőt, ahova beírhatsz egy szöveget, egy gombot és valamit ahol futhat egy animáció, olyan széles és magas legyen, mint a böngészőablak -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
 <body>
-    <h1 style="text-align: center; font-size: 50px; color: red;">Helló Edina!</h1>
+    <input type="text" id="input">
+    <button id="button">Go</button>
+    <br>
+    <canvas id="canvas" style="border: 1px solid black;"></canvas>
+
+    <script>
+        var button = document.getElementById("button");
+        button.addEventListener("click", function () {
+            // animáció indul
+            animate();
+
+        });
+        // input szöveg animációja: az egész szöveg az ablak széléig mozog és ha eléri visszapattan - mint egy képernyőkímélő animáció
+        function animate() {
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            var text = document.getElementById("input").value;
+            var x = 0;
+            var y = 0;
+            var width = canvas.width;
+            var height = canvas.height;
+            ctx.font = "30px Arial";
+            // szöveg valóságos magasságának meghatározása
+            var textWidth = ctx.measureText(text).width;
+            var textHeight = parseInt(ctx.font, 10);
+            // magasságból levonjuk a felső térközt
+            textHeight = textHeight - 10;
+            var dx = 1;
+            var dy = 1;
+            var interval = setInterval(function () {
+                ctx.clearRect(0, 0, width, height);
+                // szöveg kirajzolása kkordináták eltolása, hogy ne lógjon ki a szöveg a canvasról
+                ctx.fillText(text, x, y + textHeight);
+                x += dx;
+                y += dy;
+                if (x + textWidth > width) {
+                    dx = -1;
+                }
+                if (x < 0) {
+                    dx = 1;
+                }
+                if (y + textHeight > height) {
+                    dy = -1;
+                }
+                if (y < 0) {
+                    dy = 1;
+                }
+            }, 10);
+        }
+    </script>
 </body>
+
+</html>
