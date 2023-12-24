@@ -19,7 +19,9 @@
             };
 
             client.onMessageArrived = function (message) {
-                document.getElementById('message').textContent = message.payloadString;
+                var now = new Date();
+                var timeString = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+                document.getElementById('message').textContent = timeString + ' - ' + message.payloadString;
             };
 
             // Connect the client with SSL/TLS options if required
