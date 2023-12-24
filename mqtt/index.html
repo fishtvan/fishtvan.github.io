@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MQTT Web Client</title>
+    <!-- Include Paho MQTT JavaScript client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+</head>
+<body>
+    <div id="message"></div>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize the Paho client with a WSS URL
+            var client = new Paho.MQTT.Client("ws://mqtt.freifogel.hu:8080/", "mqttClientGithub");
+
+            client.onConnectionLost = function (responseObject) {
+                console.log("Connection Lost: " + responseObject.errorMessage);
+            };
+
+            client.onMessageArrived = function (message) {
+                document.getElementById('message').textContent = message.payloadString;
+            };
+
+            // Connect the client with SSL/TLS options if required
+            client.connect({ 
+                onSuccess: function () {
+                    client.subscribe("halo");
+                },
+                //useSSL: true, // Enable SSL/TLS
+            });
+        });
+    </script>
+</body>
+</html>
+
