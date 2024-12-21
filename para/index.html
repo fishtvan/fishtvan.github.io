@@ -36,15 +36,28 @@
             width: 100%;
         }
 
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                height: auto;
+                margin: 2.5%;
+            }
+
+            .number {
+                font-size: 8vw;
+                padding: 10px;
+            }
+        }
+
         @media (orientation: portrait) {
             .number {
-                font-size: 40vh;
+                font-size: 10vh;
             }
         }
 
         @media (orientation: landscape) {
             .number {
-                font-size: 20vw;
+                font-size: 6vw;
             }
         }
     </style>
