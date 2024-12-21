@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Numbers</title>
+    <title>Szamok</title>
     <style>
         body {
             margin: 0;
@@ -17,47 +17,51 @@
         }
 
         .container {
-            width: 80%;
-            height: 80%;
-            margin: 10%;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: space-evenly;
             align-items: center;
+            gap: 5%;
         }
 
-        .number {
+        .uppernumber {
             flex: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
+            font-size: 15vh;
+            color: #333;
+            text-align: center;
+            width: 100%;
+        }
+        .lowernumber {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            font-size: 15vh;
             color: #333;
             text-align: center;
             width: 100%;
         }
 
         @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                height: auto;
-                margin: 2.5%;
-            }
-
             .number {
-                font-size: 8vw;
-                padding: 10px;
+                font-size: 20vh;
             }
         }
 
         @media (orientation: portrait) {
             .number {
-                font-size: 10vh;
+                font-size: 18vh;
             }
         }
 
         @media (orientation: landscape) {
             .number {
-                font-size: 6vw;
+                font-size: 15vh;
             }
         }
     </style>
@@ -84,8 +88,8 @@
 </head>
 <body>
     <div class="container">
-        <div class="number" id="number1">000</div>
-        <div class="number" id="number2">000</div>
+        <div class="uppernumber" id="number1">000</div>
+        <div class="lowernumber" id="number2">000</div>
     </div>
 </body>
 </html>
