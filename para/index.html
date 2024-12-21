@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Numbers</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 80%;
+            height: 80%;
+            margin: 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .number {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            text-align: center;
+            width: 100%;
+        }
+
+        @media (orientation: portrait) {
+            .number {
+                font-size: 40vh;
+            }
+        }
+
+        @media (orientation: landscape) {
+            .number {
+                font-size: 20vw;
+            }
+        }
+    </style>
+    <script>
+        async function getNumbersFromFile() {
+            const fileUrl = "https://raw.githubusercontent.com/fishtvan/para/refs/heads/main/meassurement.txt";
+
+            try {
+                const response = await fetch(fileUrl);
+                const text = await response.text();
+                const [num1, num2] = text.split(";");
+
+                document.getElementById("number1").textContent = num1.trim() || "N/A";
+                document.getElementById("number2").textContent = num2.trim() || "N/A";
+            } catch (error) {
+                console.error("Error fetching the file:", error);
+                document.getElementById("number1").textContent = "Error";
+                document.getElementById("number2").textContent = "Error";
+            }
+        }
+
+        window.onload = getNumbersFromFile;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="number" id="number1">000</div>
+        <div class="number" id="number2">000</div>
+    </div>
+</body>
+</html>
+
